@@ -495,7 +495,13 @@ async def blacklisted_chats() -> list:
         chats_list.append(chat["chat_id"])
     return chats_list
 
-
+async def delete_served_chat(chat_id: int):
+    """Remove a chat from served chats database when bot is removed"""
+    is_served = await is_served_chat(chat_id)
+    if not is_served:
+        return
+    return await chatsdb.delete_one({"chat_id": chat_id})
+    
 async def blacklist_chat(chat_id: int) -> bool:
     if not await blacklist_chatdb.find_one({"chat_id": chat_id}):
         await blacklist_chatdb.insert_one({"chat_id": chat_id})
@@ -644,3 +650,4 @@ async def remove_banned_user(user_id: int):
     if not is_gbanned:
         return
     return await blockeddb.delete_one({"user_id": user_id})
+
