@@ -40,8 +40,8 @@ GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+0nICIHfE2AkxMzA1")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+0nICIHfE2AkxMzA1")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/RAGNOR_NETWORK")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/my_feelingsg")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
@@ -54,12 +54,6 @@ SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
 
 # Maximum limit for fetching playlist's track from youtube, spotify, apple links.
 PLAYLIST_FETCH_LIMIT = int(getenv("PLAYLIST_FETCH_LIMIT", 25))
-
-API_URL = getenv("API_URL", 'https://pytdbotapi.thequickearn.xyz')
-VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.thequickearn.xyz')
-API_KEY = getenv("API_KEY", "NxGBNexGenBots1ecb2c")
-
-
 
 
 # Telegram audio and video file size limit (in bytes)
