@@ -9,7 +9,7 @@ from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 from ShrutixMusic.utils.database import is_on_off
-from ShrutixMusic import app
+from ShrutixMusic import nand
 from ShrutixMusic.utils.formatters import time_to_seconds
 import random
 import logging
@@ -20,7 +20,7 @@ from urllib.parse import urlparse
 YOUR_API_URL = None
 
 def cookie_txt_file():
-    cookie_dir = "ShrutiMusic/cookies"
+    cookie_dir = "ShrutixMusic/cookies"
     if not os.path.exists(cookie_dir):
         return None
     cookies_files = [f for f in os.listdir(cookie_dir) if f.endswith(".txt")]
@@ -31,7 +31,7 @@ def cookie_txt_file():
 
 async def load_api_url():
     global YOUR_API_URL
-    logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+    logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
     
     try:
         async with aiohttp.ClientSession() as session:
@@ -58,7 +58,7 @@ async def get_telegram_file(telegram_link: str, video_id: str, file_type: str) -
     """
     TG link to source
     """
-    logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+    logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
     try:
         extension = ".webm" if file_type == "audio" else ".mkv"
         file_path = os.path.join("downloads", f"{video_id}{extension}")
@@ -82,7 +82,7 @@ async def get_telegram_file(telegram_link: str, video_id: str, file_type: str) -
         logger.info(f"📥 [TELEGRAM] Downloading from @{channel_name}/{message_id}")
         
         # Pyrogram se message fetch karke download
-        msg = await app.get_messages(channel_name, message_id)
+        msg = await nand.get_messages(channel_name, message_id)
         
         os.makedirs("downloads", exist_ok=True)
         await msg.download(file_name=file_path)
@@ -110,12 +110,12 @@ async def download_song(link: str) -> str:
     if not YOUR_API_URL:
         await load_api_url()
         if not YOUR_API_URL:
-            logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+            logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
             logger.error("API URL not available")
             return None
     
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
-    logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+    logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
     logger.info(f"🎵 [AUDIO] Starting download for: {video_id}")
 
     if not video_id or len(video_id) < 3:
@@ -196,12 +196,12 @@ async def download_video(link: str) -> str:
     if not YOUR_API_URL:
         await load_api_url()
         if not YOUR_API_URL:
-            logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+            logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
             logger.error("API URL not available")
             return None
     
     video_id = link.split('v=')[-1].split('&')[0] if 'v=' in link else link
-    logger = LOGGER("ShrutiMusic/platforms/Youtube.py")
+    logger = LOGGER("ShrutixMusic/platforms/Youtube.py")
     logger.info(f"🎥 [VIDEO] Starting download for: {video_id}")
 
     if not video_id or len(video_id) < 3:
